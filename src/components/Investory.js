@@ -3,10 +3,11 @@ import AddFishForm from './AddFishForm';
 
 class Investory extends React.Component {
   render() {
+    debugger;
     return (
       <div>
         <h2>Investory</h2>
-        <AddFishForm />
+        <AddFishForm addFish={this.props.addFish}/>
       </div>
     );
   }
