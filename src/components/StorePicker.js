@@ -7,7 +7,6 @@ class StorePicker extends React.Component {
     event.preventDefault();
 
     const storeId = this.storeInput.value;
-    debugger;
     this.context.router.transitionTo(`/store/${storeId}`);
   }
 
