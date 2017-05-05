@@ -72,6 +72,13 @@ class App extends React.Component {
     this.setState({ fishes });
   }
 
+  removeFish(key) {
+    const fishes = {...this.state.fishes};
+    fishes[key] = null;
+
+    this.setState({fishes});
+  }
+
   render () {
     return (
       <div className='catch-of-day'>
@@ -96,6 +103,7 @@ class App extends React.Component {
           loadSample={() => { this.loadSample(); }}
           fishes={this.state.fishes}
           updateFish={(key, fish) => { this.updateFish(key, fish); }}
+          removeFish={(key, fish) => { this.removeFish(key, fish); }}
         />
       </div>
     );
