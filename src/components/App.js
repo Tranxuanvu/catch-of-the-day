@@ -24,6 +24,14 @@ class App extends React.Component {
         state: 'fishes'
       }
     );
+
+    const localStorageRef = localStorage.getItem(`order-${this.props.params.storeId}`);
+
+    if (localStorageRef) {
+      this.setState({
+        order: JSON.parse(localStorageRef)
+      });
+    }
   }
 
   componentWillUnmount() {
@@ -57,6 +65,13 @@ class App extends React.Component {
     this.setState({order});
   }
 
+  updateFish(key, updatedFish) {
+    const fishes = {...this.state.fishes};
+    fishes[key] = updatedFish;
+
+    this.setState({ fishes });
+  }
+
   render () {
     return (
       <div className='catch-of-day'>
@@ -79,6 +94,8 @@ class App extends React.Component {
         <Investory
           addFish={(fish) => { this.addFish(fish); }}
           loadSample={() => { this.loadSample(); }}
+          fishes={this.state.fishes}
+          updateFish={(key, fish) => { this.updateFish(key, fish); }}
         />
       </div>
     );
