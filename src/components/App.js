@@ -3,13 +3,15 @@ import Header from './Header';
 import Investory from './Investory';
 import sampleFishes from '../sample-fishes';
 import Fish from './Fish';
+import Order from './Order';
 
 class App extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      fishes: {}
+      fishes: {},
+      order: {}
     }
   }
 
@@ -28,6 +30,13 @@ class App extends React.Component {
     });
   }
 
+  addToOrder(key) {
+    const order = { ...this.state.order };
+
+    order[key] = order[key] + 1 || 1;
+    this.setState({order});
+  }
+
   render () {
     return (
       <div className='catch-of-day'>
@@ -37,10 +46,16 @@ class App extends React.Component {
             {
               Object
                 .keys(this.state.fishes)
-                .map(key => <Fish key={key} details={this.state.fishes[key]} />)
+                .map(key => <Fish key={key}
+                                  details={this.state.fishes[key]}
+                                  index={key}
+                                  addToOrder={(key) => { this.addToOrder(key); }}
+                            />
+                    )
             }
           </ul>
         </div>
+        <Order fishes={this.state.fishes} order={this.state.order}/>
         <Investory
           addFish={(fish) => { this.addFish(fish); }}
           loadSample={() => { this.loadSample(); }}
