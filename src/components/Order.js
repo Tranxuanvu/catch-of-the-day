@@ -6,7 +6,7 @@ class Order extends React.Component {
     const fish = this.props.fishes[key];
     const quantity = this.props.order[key];
     const removeButton = <button onClick={() => this.props.removeFromOrder(key)}>&times;</button>
-
+    debugger;
     return(
       <li key={key}>
         <span>

@@ -5,6 +5,8 @@ import sampleFishes from '../sample-fishes';
 import Fish from './Fish';
 import Order from './Order';
 import base from '../base';
+import { Grid, Row, Col } from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.css';
 
 class App extends React.Component {
   constructor() {
@@ -89,34 +91,46 @@ class App extends React.Component {
   render () {
     return (
       <div className='catch-of-day'>
-        <div className='menu'>
-          <Header tagline='Fresh SeaFood Market'/>
-          <ul className='list-of-fishes'>
-            {
-              Object
-                .keys(this.state.fishes)
-                .map(key => <Fish key={key}
-                                  details={this.state.fishes[key]}
-                                  index={key}
-                                  addToOrder={(key) => { this.addToOrder(key); }}
-                            />
-                    )
-            }
-          </ul>
-        </div>
-        <Order
-          fishes={this.state.fishes}
-          order={this.state.order}
-          params={this.props.params}
-          removeFromOrder={(key) => this.removeFromOrder(key)}
-        />
-        <Investory
-          addFish={(fish) => { this.addFish(fish); }}
-          loadSample={() => { this.loadSample(); }}
-          fishes={this.state.fishes}
-          updateFish={(key, fish) => { this.updateFish(key, fish); }}
-          removeFish={(key, fish) => { this.removeFish(key, fish); }}
-        />
+        <Header />
+        <Grid>
+          <Row className="show-grid">
+            <Col md={6}>
+              <div className='menu'>
+                {/*<Header tagline='Fresh SeaFood Market'/>*/}
+                <h2 className='tagline'>Fresh SeaFood Market</h2>
+                <ul className='list-of-fishes'>
+                  {
+                    Object
+                      .keys(this.state.fishes)
+                      .map(key => <Fish key={key}
+                                        details={this.state.fishes[key]}
+                                        index={key}
+                                        addToOrder={(key) => { this.addToOrder(key); }}
+                                  />
+                          )
+                  }
+                </ul>
+              </div>
+            </Col>
+            <Col md={6}>
+              <Order
+                fishes={this.state.fishes}
+                order={this.state.order}
+                params={this.props.params}
+                removeFromOrder={(key) => this.removeFromOrder(key)}
+              />
+            </Col>
+          </Row>
+        </Grid>
+        <Col md={6} xsOffset={3}>
+          <Investory
+            addFish={(fish) => { this.addFish(fish); }}
+            loadSample={() => { this.loadSample(); }}
+            fishes={this.state.fishes}
+            updateFish={(key, fish) => { this.updateFish(key, fish); }}
+            removeFish={(key, fish) => { this.removeFish(key, fish); }}
+          />
+        </Col>
       </div>
     );
   }
