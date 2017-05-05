@@ -4,10 +4,15 @@ import { formatPrice } from '../helpers';
 class Order extends React.Component {
   renderOrder(key) {
     const fish = this.props.fishes[key];
-    const quantity = this.props.order[key]
+    const quantity = this.props.order[key];
+    const removeButton = <button onClick={() => this.props.removeFromOrder(key)}>&times;</button>
+
     return(
       <li key={key}>
-        <span>{this.props.order[key]} {fish.name}</span>
+        <span>
+          <span key={quantity}>{quantity} </span>
+          x {fish.name} {removeButton}
+        </span>
         <span className='price'>{formatPrice(quantity * fish.price)}</span>
       </li>
     );
